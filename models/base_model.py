@@ -5,7 +5,12 @@ from datetime import datetime
 from sqlalchemy.orm import declarative_base
 from sqlalchemy import Column, String, DateTime
 from os import getenv
-Base = declarative_base()
+import models
+
+if models.storage_t == "db":
+    Base = declarative_base()
+else:
+    Base = object
 
 
 class BaseModel:
@@ -36,7 +41,8 @@ class BaseModel:
     def __str__(self):
         """Returns a string representation of the instance"""
         cls = (str(type(self)).split('.')[-1]).split('\'')[0]
-        del self.__dict__['_sa_instance_state']
+        if '_sa_instance_state' in self.__dict__:
+            del self.__dict__['_sa_instance_state']
         return '[{}] ({}) {}'.format(cls, self.id, self.__dict__)
 
     def save(self):

@@ -170,7 +170,7 @@ class HBNBCommand(cmd.Cmd):
 
         key = c_name + "." + c_id
         try:
-            print(storage.all()[key])
+            print(storage.all(HBNBCommand.classes[c_name])[key])
         except KeyError:
             print("** no instance found **")
 
@@ -202,7 +202,7 @@ class HBNBCommand(cmd.Cmd):
         key = c_name + "." + c_id
 
         try:
-            del(storage.all()[key])
+            storage.delete(storage.all()[key])
             storage.save()
         except KeyError:
             print("** no instance found **")
@@ -221,14 +221,15 @@ class HBNBCommand(cmd.Cmd):
             if args not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
-            for k, v in storage.all().items():
-                if k.split('.')[0] == args:
-                    print_list.append(str(v))
+            for v in storage.all(HBNBCommand.classes[args]).values():
+                print_list.append(v)
         else:
-            for k, v in storage.all().items():
-                print_list.append(str(v))
-
-        print(print_list)
+            for v in storage.all().values():
+                print_list.append(v)
+        print("[", end='')
+        for obj in print_list:
+            print(str(obj), end='')
+        print("]")
 
     def help_all(self):
         """ Help information for the all command """

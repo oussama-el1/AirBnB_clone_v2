@@ -37,7 +37,7 @@ class DBStorage:
                                              HBNB_MYSQL_HOST,
                                              HBNB_MYSQL_DB),
                                       pool_pre_ping=True)
-        if getenv("HBNB_ENV") == "Test":
+        if HBNB_ENV == "Test":
             metadata = MetaData()
             metadata.reflect(bind=self.__engine)
             Base.metadata.drop_all(bind=self.__engine)
