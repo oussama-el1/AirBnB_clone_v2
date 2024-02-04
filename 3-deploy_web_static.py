@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 """
-use Fabric to create archive and deploy the content
+use Fabric to create archive
+and deploy the content
 """
+
 from datetime import datetime
 from fabric.api import local
 from os.path import isdir
