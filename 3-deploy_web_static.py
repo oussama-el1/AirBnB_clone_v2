@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
-use Fabric to create archive
-and deploy the content
+Fabric script based on the file 2-do_deploy_web_static.py that creates and
+distributes an archive to the web servers
 """
 
 from datetime import datetime
