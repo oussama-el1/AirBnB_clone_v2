@@ -62,3 +62,7 @@ class FileStorage:
         if obj is not None:
             if obj in self.all().values():
                 del self.all()[obj.to_dict()['__class__'] + '.' + obj.id]
+
+    def close(self):
+        """reaload all"""
+        self.reload()
