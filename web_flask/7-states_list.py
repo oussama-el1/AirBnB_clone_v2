@@ -14,7 +14,7 @@ def fetchdata():
     return render_template('7-states_list.html', data=sorted_states)
 
 
-@app.teardown_appcontext()
+@app.teardown_appcontext
 def removesession(exception):
     """remove session"""
     storage.close()
