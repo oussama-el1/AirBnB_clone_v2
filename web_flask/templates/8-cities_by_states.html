@@ -6,20 +6,14 @@
     <BODY>
         <H1>States</H1>
         <UL>
-        {% for state in states %}
-            <LI>{{ state.id }}: <B>{{ state.name }}</B></LI>
-            <UL>
-            {% if engine == 'db' %}
-                {% set city_list = state.cities | list %}
-            {% else %}
-                {% set city_list = state.cities() %}
-            {% endif %}
-            {% set city_list = city_list | list %} {# Convert cities to a list #}
-            {% set sorted_cities = city_list | sort(attribute='name') %}
-            {% for city in sorted_cities %}
-                <LI>{{ city.id }}: <B>{{ city.name }}</B></LI>
-            {% endfor %}
-            </UL>
+        {% for state in states|sort(attribute='name') %}
+            <LI>{{ state.id }}: <B>{{ state.name }}</B>
+	        <UL>
+	        {% for city in state.cities|sort(attribute='name') %}
+	            <LI>{{ city.id }}: <B>{{ city.name }}</B></LI>
+	        {% endfor %}
+	        </UL>
+	    </LI>
         {% endfor %}
         </UL>
     </BODY>
